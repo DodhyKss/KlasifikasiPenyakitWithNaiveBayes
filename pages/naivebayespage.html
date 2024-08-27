@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Penyakit Ibu Hamil</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .judul-web {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .gejala-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gejala {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gejala:hover {
+            background-color: #f0f8ff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .gejala input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .gejala label {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 15px auto 0;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .gejala-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="judul-web">Klasifikasi Penyakit Ibu Hamil</h1>
+        <form id="gejalaForm">
+            <div class="form-group">
+                <label for="nama">Nama:</label>
+                <input type="text" id="namaPasien" name="nama" required>
+            </div>
+            <div class="form-group">
+                <label for="umur">Umur:</label>
+                <input type="number" id="umurPasien" name="umur" required>
+            </div>
+            <br>
+            <div class="gejala-container">
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="mual"> Mual</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="muntah"> Muntah</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="pusing"> Pusing</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="demam"> Demam</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="kaki_bengkak"> Kaki Bengkak</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="nyeri_perut"> Nyeri Perut</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="penglihatan_kabur"> Penglihatan Kabur</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="peningkatan_tekanan_darah"> Peningkatan Tekanan Darah</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="kram_perut"> Kram Perut</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="pendarahan"> Pendarahan</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="kehilangan_selera_makan"> Kehilangan Selera Makan</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="keguguran"> Keguguran</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="nyeri_pinggang"> Nyeri Pinggang</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="sulit_tidur"> Sulit Tidur</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="rasa_panas"> Rasa Panas di Sekitar Perut</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="peningkatan_berat_badan"> Peningkatan Berat Badan</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="berdebar"> Berdebar-debar</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="sesak_napas"> Sesak Napas</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="sering_kencing"> Sering Kencing</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="kaki_dingin"> Kaki Dingin</label>
+                </div>
+                <div class="gejala">
+                    <label><input type="checkbox" name="gejala" value="pucat"> Pucat</label>
+                </div>
+            </div>
+            <button class="btn" type="button" onclick="klasifikasi()">Klasifikasi Penyakit</button>
+            <button class="btn" type="button" onclick="kembali()">Kembali</button>
+        </form>
+        <div class="result" id="result"></div>
+        <button class="btn" id="saveData" type="button">Save</button>
+    </div>
+    <script type="module" src="/script/crud.js"></script>
+    <script src="/script/naivebayes.js"></script>
+</body>
+</html>

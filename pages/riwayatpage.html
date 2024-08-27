@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script type="module" src="/script/homepage.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #3498db;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .sidebar ul li {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 0;
+            background-color: hsl(216, 69%, 69%);
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: hsl(216, 74%, 57%);
+        }
+
+        .sidebar img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        header {
+            background-color: hsl(327, 85%, 37%);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .crud-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .crud-table th, .crud-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .crud-table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .crud-table td {
+            background-color: #f9f9f9;
+        }
+
+        .crud-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .crud-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .crud-buttons button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .crud-buttons button:hover {
+            background-color: #2980b9;
+        }
+
+        .crud-buttons button.delete {
+            background-color: #e74c3c;
+        }
+
+        .crud-buttons button.delete:hover {
+            background-color: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+            }
+        }
+        .sidebar img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="/asset/logo.png" alt="Logo">
+        <h2>User Panel</h2>
+        <ul>
+            <li><a href="/pages/homepage.html">Dashboard</a></li>
+            <li><a href="/pages/userpage.html">Users</a></li>
+            <li><a href="/pages/naivebayespage.html">Konsultasi</a></li>
+            <li><a id="getDataRiwayat" style="background-color: hsl(216, 74%, 57%);" href="#">Riwayat</a></li>
+            <li><a href="/pages/helppage.html">Help</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Riwayat Diagnosa</h1>
+            <p>Here is your history overview.</p>
+        </header>
+
+        <div class="card-container">
+            <!-- Tabel Riwayat Diagnosa -->
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Umur</th>
+                        <th>Diagnosa</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="diagnosaTableBody">
+                    <!-- Data dari riwayat diagnosa akan diisi di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        // Import modul Firebase yang dibutuhkan
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+        import { getDatabase, ref, get, remove } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCYCafXDQ6Rar6DlH23jzYa6SMLJ9w1MUc",
+            authDomain: "naive-bayes-6edd4.firebaseapp.com",
+            databaseURL: "https://naive-bayes-6edd4-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "naive-bayes-6edd4",
+            storageBucket: "naive-bayes-6edd4.appspot.com",
+            messagingSenderId: "564595812915",
+            appId: "1:564595812915:web:0cf54f203ccfdc3721d146"
+        };
+
+        // Inisialisasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth(app);
+
+        // Ambil elemen tabel
+        const tbody = document.getElementById('diagnosaTableBody');
+
+        // Fungsi untuk menampilkan data di tabel
+        function displayData(data, key) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${data.name}</td>
+                <td>${data.age}</td>
+                <td>${data.diagnosa}</td>
+                <td>${new Date(data.date).toLocaleString()}</td>
+                <td>
+                    <button class="delete" data-key="${key}">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+
+            // Event listener untuk tombol delete
+            const deleteButton = row.querySelector('.delete');
+            deleteButton.addEventListener('click', () => {
+                deleteData(key);
+            });
+        }
+
+        // Fungsi untuk mendapatkan semua data berdasarkan user ID yang login
+        function getDataByUserId(userId) {
+            const dbRef = ref(database, 'users/' + userId);
+            get(dbRef)
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        tbody.innerHTML = ''; // Kosongkan tabel sebelum menambahkan data baru
+                        Object.keys(data).forEach(key => {
+                            displayData(data[key], key);
+                        });
+                    } else {
+                        console.log("No data available for user ID:", userId);
+                        tbody.innerHTML = '<tr><td colspan="5">No data available</td></tr>';
+                    }
+                })
+                .catch(error => {
+                    console.error("Error getting data:", error);
+                });
+        }
+
+        // Fungsi untuk menghapus data berdasarkan key
+        function deleteData(key) {
+            const dbRef = ref(database, 'users/' + auth.currentUser.uid + '/' + key);
+            remove(dbRef)
+                .then(() => {
+                    console.log("Data deleted successfully");
+                    document.querySelector(`[data-key="${key}"]`).closest('tr').remove();
+                })
+                .catch((error) => {
+                    console.error("Error deleting data:", error);
+                });
+        }
+
+        // Pantau perubahan status autentikasi
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Jika user sudah login, ambil data berdasarkan user ID
+                const userId = user.uid;
+                getDataByUserId(userId);
+            } else {
+                console.log("No user is signed in.");
+            }
+        });
+    </script>
+</body>
+</html>
+

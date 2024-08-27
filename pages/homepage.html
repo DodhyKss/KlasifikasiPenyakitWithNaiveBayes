@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script type="module" src="/script/homepage.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #3498db;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .sidebar ul li {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 15px 0;
+            background-color: hsl(216, 69%, 69%);
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: hsl(216, 74%, 57%);
+        }
+
+        .sidebar img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        header {
+            background-color: hsl(327, 85%, 37%);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .card p {
+            font-size: 24px;
+            margin: 0;
+            color: hsl(327, 85%, 37%);
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Tambahkan elemen gambar untuk logo -->
+        <img src="/asset/logo.png" alt="Logo">
+        <h2>User Panel</h2>
+        <ul>
+            <li><a style="background-color: hsl(216, 74%, 57%);" href="/pages/homepage.html">Dashboard</a></li>
+            <li><a href="/pages/userpage.html">Users</a></li>
+            <li><a href="/pages/naivebayespage.html">Konsultasi</a></li>
+            <li><a id="getDataRiwayat" href="/pages/riwayatpage.html">Riwayat</a></li>
+            <li><a href="/pages/helppage.html">Help</a></li>
+            <li><a id="logout" href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Welcome, <span id="loggedUserFName"></span></h1>
+            <p>Here is your dashboard overview.</p>
+        </header>
+
+        <div class="card-container">
+            <div class="card">
+                <h3>Total Users</h3>
+                <p>1,245</p>
+            </div>
+            <div class="card">
+                <h3>New Signups</h3>
+                <p>78</p>
+            </div>
+            <div class="card">
+                <h3>Active Sessions</h3>
+                <p>56</p>
+            </div>
+            <div class="card">
+                <h3>Server Uptime</h3>
+                <p>99.99%</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
