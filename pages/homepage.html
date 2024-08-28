@@ -50,7 +50,6 @@
             display: block;
             padding: 15px 0;
             background-color: hsl(216, 69%, 69%);
-            border-radius: 5px;
             transition: background-color 0.3s ease;
         }
 
@@ -89,19 +88,45 @@
 
         .card-container {
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            justify-content: space-between; 
+            flex-direction: row;
         }
 
-        .card {
+        .card-deskripsi {
             background-color: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: calc(25% - 20px);
+            width: calc(100% - 20px);
             margin-bottom: 20px;
             text-align: center;
         }
+
+        .card-deskripsi p {
+            text-align: justify;
+        }
+
+        .card-deskripsi h4 {
+            text-align: left;
+        }
+
+        .card-deskripsi li {
+            text-align: left;
+        }
+        /* .card-user {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(20% - 20px);
+            margin-bottom: 20px;
+            text-align: center;
+            height: 400px;
+        }
+
+        .card-user ul li {
+            text-align: left;
+        } */
 
         .card h3 {
             margin: 0 0 10px;
@@ -151,22 +176,39 @@
         </header>
 
         <div class="card-container">
-            <div class="card">
-                <h3>Total Users</h3>
-                <p>1,245</p>
+            <div class="card-deskripsi">
+                <h3>Gangguan Kesehatan Maternal Ibu Hamil</h3>
+                <p>Kesehatan maternal merujuk pada kesejahteraan fisik, mental, dan sosial ibu selama periode yang meliputi sebelum kehamilan (prakonsepsi), selama kehamilan (antepartum), dan setelah melahirkan (postpartum). Kesehatan maternal tidak hanya mencakup kondisi fisik ibu, tetapi juga mencakup kondisi mental dan emosional yang dapat dipengaruhi oleh berbagai faktor seperti stres, dukungan sosial, dan lingkungan.</p>
+                <h4>A. Faktor Resiko Kesehatan Maternal</h4>
+                <ul>
+                    <li>Faktor Biologis: Usia ibu, kondisi kesehatan sebelum hamil, dan riwayat penyakit.</li>
+                    <li>Faktor Sosial-Ekonomi: Akses ke layanan kesehatan, pendidikan, pendapatan, dan status gizi.</li>
+                    <li>Faktor Lingkungan: Polusi, sanitasi, dan akses terhadap air bersih.</li>
+                </ul>
+                <h4>B. Jenis Gangguan Kesehatan Maternal</h4>
+                <ul>
+                    <li>1. Anemia pada Ibu Hamil</li>
+                    <li>2. Preeklampsia</li>
+                    <li>3. Diabetes Gestasional</li>
+                    <li>4. Infeksi Kehammilan</li>
+                    <li>5. Depresi Pasca Melahirkan</li>
+                </ul>
+                <h4>C. Dampak Gangguan Kesehatan Maternal</h4>
+                <ul>
+                    <li>Terhadap Ibu: Kematian ibu, komplikasi jangka panjang.</li>
+                    <li>Terhadap Janin/Bayi: Kematian janin, bayi lahir dengan berat badan rendah, cacat bawaan.</li>
+                    <li>Terhadap Keluarga: Beban psikologis dan ekonomi.</li>
+                </ul>
+                <h4>D. Pencegahan dan Penanganan Gangguan Kesehatan Maternal</h4>
+                <ul>
+                    <li>Pemeriksaan Kehamilan Rutin: Pentingnya antenatal care untuk deteksi dini.</li>
+                    <li>Nutrisi Seimbang: Asupan zat besi, asam folat, dan nutrisi penting lainnya.</li>
+                    <li>Manajemen Penyakit Kronis: Kontrol diabetes, hipertensi sebelum dan selama kehamilan.</li>
+                    <li>Pendidikan dan Kesadaran: Meningkatkan kesadaran ibu tentang tanda-tanda bahaya kehamilan.</li>
+                    <li>Dukungan Keluarga dan Masyarakat: Peran keluarga dan komunitas dalam mendukung kesehatan ibu.</li>
+                </ul>
             </div>
-            <div class="card">
-                <h3>New Signups</h3>
-                <p>78</p>
-            </div>
-            <div class="card">
-                <h3>Active Sessions</h3>
-                <p>56</p>
-            </div>
-            <div class="card">
-                <h3>Server Uptime</h3>
-                <p>99.99%</p>
-            </div>
+   
         </div>
     </div>
 </body>

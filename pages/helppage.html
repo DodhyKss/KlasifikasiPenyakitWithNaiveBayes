@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>Help</title>
     <script type="module" src="/script/homepage.js"></script>
 
     <style>
@@ -88,140 +88,93 @@
 
         .card-container {
             display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        .card p {
+            font-size: 24px;
+            margin: 0;
+            color: hsl(327, 85%, 37%);
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+            }
+        }
+
+        .kontak {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .kontak h2 {
+            text-align: center;
+        }
+
+        .card-container{
+            display: flex;
             justify-content: center;
             align-items: center;
             height: calc(100vh - 140px);
             margin-left: -20px;
         }
 
-        .card-user {
-            background-color: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            width: calc(98% - 20px);
-            max-width: 550px;
-            text-align: center;
-            position: relative;
-        }
-
-        .card-user img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #3498db;
-            margin-bottom: 15px;
-        }
-
-        .card-user h3 {
-            margin: 10px 0 5px;
-            font-size: 22px;
-            color: #2c3e50;
-        }
-
-        .card-user p {
-            font-size: 16px;
-            margin: 5px 0;
-            color: #7f8c8d;
-        }
-
-        .card-user button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .card-user button:hover {
-            background-color: #2980b9;
-        }
-
-        .card-user table {
-            width: 100%;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .card-user table td {
-            padding: 8px 0;
-        }
-
-        .card-user table td:first-child {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        @media (max-width: 768px) {
-            .card-user {
-                width: calc(50% - 20px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card-user {
-                width: 100%;
-            }
-        }
-
     </style>
 </head>
 <body>
     <div class="sidebar">
+        <!-- Tambahkan elemen gambar untuk logo -->
         <img src="/asset/logo.png" alt="Logo">
         <h2>User Panel</h2>
         <ul>
             <li><a href="/pages/homepage.html">Dashboard</a></li>
-            <li><a style="background-color: hsl(216, 74%, 57%);" href="/pages/userpage.html">Users</a></li>
+            <li><a href="/pages/userpage.html">Users</a></li>
             <li><a href="/pages/naivebayespage.html">Konsultasi</a></li>
             <li><a id="getDataRiwayat" href="/pages/riwayatpage.html">Riwayat</a></li>
-            <li><a href="/pages/helppage.html">Help</a></li>
+            <li><a style="background-color: hsl(216, 74%, 57%);"  href="/pages/helppage.html">Help</a></li>
             <li><a id="logout" href="#">Logout</a></li>
         </ul>
     </div>
 
     <div class="main-content">
         <header>
-            <h1>User Profile</h1>
-            <p>Here is your profile overview.</p>
+            <h1>Help <span id="loggedUserFName"></span></h1>
         </header>
 
         <div class="card-container">
-            <div class="card-user">
-                <!-- Gambar Profil -->
-  
-
-                <h3><span id="loggedUserFName"></span></h3>
-                <p><span id="loggedUserEmail"></span></p>
-
-                <!-- Tabel Informasi -->
-                <table>
-                    <tr>
-                        <td>Alamat:</td>
-                        <td><p><span id="loggedUserAddress"></p></span></td>
-                    </tr>
-                    <tr>
-                        <td>No HP:</td>
-                        <td><p><span id="loggedUserPhone"></p></span></td>
-                    </tr>
-                </table>
-                <br>
-                <br>
-                <!-- Tombol Ubah Data -->
-                <button id="sendMessageWa" >Ubah Data</button>
+            <div class="kontak">
+                <h2>Kontak</h2>
+                <p>Email : dodhykss77@gmail.com</p>
+                <p>No Hp: 081999819265</p>
             </div>
         </div>
     </div>
-    <script>
-        
-    </script>
+
 </body>
 </html>
